@@ -1,0 +1,9 @@
+node_modules
+.next
+.vercel
+repo-review
+attachments
+.uploads
+tmp
+*.log
+.DS_Store
