@@ -39,7 +39,7 @@ export async function getHomepageViewModel(locale: string): Promise<HomepageView
       usedFallback: adaptedResult.source !== 'content-blocks',
       repositorySource: snapshot.source,
       dbConfigured: snapshot.diagnostics.dbConfigured,
-      persistenceReason: snapshot.diagnostics.reason,
+      reason: snapshot.diagnostics.reason,
       adapterPath: HOMEPAGE_ADAPTER_PATHS.repositoryAdapter,
     },
   };
