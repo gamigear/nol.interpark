@@ -8,9 +8,33 @@ import type { ContentItem, HomeSection } from '@/types/home';
 
 type EditorialSectionProps = {
   section: HomeSection<ContentItem>;
+  locale?: 'en' | 'ko';
 };
 
-export function EditorialSection({ section }: EditorialSectionProps) {
+const EDITORIAL_COPY = {
+  en: {
+    kicker: 'This week\'s concert',
+    shelf: 'Homepage editorial rail',
+    emptyTitle: 'Stories will appear here soon',
+    emptyDescription: 'Editorial framing is ready, but there is no story content to surface yet.',
+    emptyCta: 'See travel guides',
+    emptyNote: 'This rail will automatically surface published editorial content as soon as stories are available.',
+    cardCta: 'Read story',
+  },
+  ko: {
+    kicker: '이번 주 공연',
+    shelf: '홈페이지 에디토리얼 레일',
+    emptyTitle: '스토리 콘텐츠가 곧 노출됩니다',
+    emptyDescription: '에디토리얼 영역은 준비되어 있지만 현재 노출할 스토리가 없습니다.',
+    emptyCta: '여행 가이드 보기',
+    emptyNote: '스토리 콘텐츠가 연결되면 이 레일에 자동으로 노출됩니다.',
+    cardCta: '스토리 보기',
+  },
+} as const;
+
+export function EditorialSection({ section, locale = 'en' }: EditorialSectionProps) {
+  const copy = EDITORIAL_COPY[locale];
+
   return (
     <SectionShell id={section.id}>
       <SectionHeader
@@ -18,29 +42,29 @@ export function EditorialSection({ section }: EditorialSectionProps) {
         description={section.description}
         ctaLabel={section.ctaLabel}
         ctaHref={section.ctaHref}
-        kicker="Inspiration"
+        kicker={copy.kicker}
       />
       <PublicMetaList
         items={[
           { label: 'Items', value: String(section.items.length) },
           { label: 'Route', value: section.ctaHref ?? 'Pending' },
-          { label: 'Shelf', value: 'Homepage editorial rail' },
+          { label: 'Shelf', value: copy.shelf },
         ]}
         compact
       />
       {section.items.length > 0 ? (
         <HorizontalCarousel>
           {section.items.map((item) => (
-            <ContentCard key={item.id} item={item} />
+            <ContentCard key={item.id} item={item} ctaLabel={copy.cardCta} />
           ))}
         </HorizontalCarousel>
       ) : (
         <PublicEmptyState
-          title="Stories will appear here soon"
-          description="Editorial framing is ready, but there is no story content to surface yet."
-          ctaLabel="See travel guides"
+          title={copy.emptyTitle}
+          description={copy.emptyDescription}
+          ctaLabel={copy.emptyCta}
           ctaHref={section.ctaHref ?? '/en/guides'}
-          note="This rail will automatically surface published editorial content as soon as stories are available."
+          note={copy.emptyNote}
           noteTone="muted"
           compact
         />

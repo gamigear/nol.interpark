@@ -95,6 +95,161 @@ button {
   margin: 0 auto;
 }
 
+
+.homepage-stack {
+  display: grid;
+  gap: 56px;
+  padding-bottom: 72px;
+}
+
+.homepage-topbar-strip {
+  padding-top: 18px;
+}
+
+.homepage-topbar-strip--categories {
+  padding-top: 0;
+}
+
+.homepage-pill-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.homepage-pill-grid--benefits {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.homepage-pill-grid--categories {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.homepage-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 46px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  font-weight: 700;
+}
+
+.homepage-pill--soft {
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.homepage-pill--category {
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.homepage-hero-section {
+  padding-top: 8px;
+}
+
+.homepage-hero-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(260px, 0.85fr);
+  gap: 28px;
+  align-items: stretch;
+}
+
+.homepage-hero-copy {
+  display: grid;
+  align-content: center;
+  gap: 18px;
+}
+
+.homepage-hero-media {
+  position: relative;
+  min-height: 280px;
+  border-radius: 28px;
+  overflow: hidden;
+  background: linear-gradient(160deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+  border: 1px solid rgba(255,255,255,0.14);
+}
+
+.homepage-hero-orb {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(2px);
+}
+
+.homepage-hero-orb--primary {
+  width: 220px;
+  height: 220px;
+  right: 24px;
+  top: 24px;
+  background: radial-gradient(circle, rgba(255,255,255,0.34), rgba(255,255,255,0.02));
+}
+
+.homepage-hero-orb--secondary {
+  width: 180px;
+  height: 180px;
+  left: 24px;
+  bottom: 16px;
+  background: radial-gradient(circle, rgba(255,255,255,0.16), rgba(255,255,255,0.01));
+}
+
+.homepage-hero-card {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 24px;
+  display: grid;
+  gap: 8px;
+  padding: 18px 18px 20px;
+  border-radius: 22px;
+  background: rgba(8, 15, 30, 0.32);
+  border: 1px solid rgba(255,255,255,0.14);
+  backdrop-filter: blur(12px);
+}
+
+.homepage-hero-card strong {
+  font-size: 1.02rem;
+}
+
+.homepage-hero-card span {
+  color: rgba(255,255,255,0.86);
+  font-size: 0.92rem;
+}
+
+.cards-grid--top-picks {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  align-items: start;
+}
+
+.cards-grid--guides {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 1100px) {
+  .homepage-pill-grid--benefits {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .homepage-pill-grid--categories {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .homepage-hero-panel {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 960px) {
+  .homepage-stack {
+    gap: 48px;
+  }
+
+  .cards-grid--top-picks,
+  .cards-grid--guides {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 .stack-xl {
   display: grid;
   gap: 72px;
@@ -704,7 +859,8 @@ button {
 }
 
 @media (max-width: 960px) {
-  .stack-xl {
+  
+.stack-xl {
     gap: 56px;
   }
 
@@ -738,7 +894,41 @@ button {
     width: min(100% - 20px, 1200px);
   }
 
-  .stack-xl {
+  .homepage-pill-grid--benefits,
+  .homepage-pill-grid--categories,
+  .cards-grid--top-picks,
+  .cards-grid--guides {
+    grid-template-columns: 1fr;
+  }
+
+  .homepage-pill--category {
+    min-height: 52px;
+    padding-inline: 16px;
+  }
+
+  .homepage-hero-panel {
+    grid-template-columns: 1fr;
+    padding: 28px 22px;
+    border-radius: 28px;
+  }
+
+  .homepage-hero-media {
+    min-height: 180px;
+  }
+
+  .homepage-hero-card {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+  }
+
+
+  .container {
+    width: min(100% - 20px, 1200px);
+  }
+
+  
+.stack-xl {
     gap: 44px;
     padding-bottom: 56px;
   }
