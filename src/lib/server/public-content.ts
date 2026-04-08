@@ -271,7 +271,7 @@ export async function getPublicStoryDetailViewModel(
       breadcrumbs: [
         createHomeBreadcrumb(source.locale),
         { label: 'Stories', href: `/${source.locale}/stories/dubai-first-timer-guide` },
-        { label: hasStory ? story.title : 'Unavailable story' },
+        { label: story ? story.title : 'Unavailable story' },
       ],
       metaItems: createPublicBoundaryMetaItems({
         kind: 'story-detail',
