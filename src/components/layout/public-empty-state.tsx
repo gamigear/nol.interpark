@@ -1,6 +1,6 @@
 type PublicEmptyStateProps = {
   title: string;
-  description: string;
+  description?: string;
   ctaLabel?: string;
   ctaHref?: string;
   compact?: boolean;
@@ -24,7 +24,7 @@ export function PublicEmptyState({
   ctaHint,
 }: PublicEmptyStateProps) {
   const normalizedTitle = title.trim();
-  const normalizedDescription = description.trim();
+  const normalizedDescription = description?.trim() ?? '';
   const normalizedEyebrow = eyebrow?.trim();
   const normalizedNote = note?.trim();
   const normalizedCtaHint = ctaHint?.trim();
