@@ -4,7 +4,7 @@ import { PublicMetaList, type PublicMetaItem } from '@/components/layout/public-
 type PublicPageHeroProps = {
   eyebrow: string;
   title: string;
-  description: string;
+  description?: string;
   children?: ReactNode;
   metaItems?: PublicMetaItem[];
   note?: string;
@@ -22,7 +22,7 @@ export function PublicPageHero({
 }: PublicPageHeroProps) {
   const normalizedEyebrow = eyebrow.trim();
   const normalizedTitle = title.trim();
-  const normalizedDescription = description.trim();
+  const normalizedDescription = description?.trim() ?? '';
   const normalizedNote = note?.trim();
   const normalizedEmptySupportCopy = emptySupportCopy.trim();
   const hasMeta = metaItems.some((item) => item.label.trim().length > 0 && item.value.trim().length > 0);
