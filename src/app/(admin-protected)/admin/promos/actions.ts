@@ -2,6 +2,7 @@
 
 import { savePromosCommand } from '@/lib/server/promos/use-case';
 import type { DatabaseConnectionIntent } from '@/lib/server/db/types';
+import type { BlockType, ContentItemType, PublishStatus } from '@/lib/server/db/schema-types';
 
 type SaveResult = { ok: true; saved: true; savedBlockCount: number; savedItemCount: number } | { ok: false; error: string };
 
@@ -59,14 +60,14 @@ function collectBlocks(formData: FormData, locale: string, now: string) {
     _idx: number;
     id: string;
     pageId: string;
-    blockType: string;
+    blockType: BlockType;
     key: string;
-    status: string;
+    status: PublishStatus;
     displayOrder: number;
-    variant: null;
-    settingsJson: null;
-    visibilityRulesJson: null;
-    publishedAt: string;
+    variant?: string;
+    settingsJson?: Record<string, unknown>;
+    visibilityRulesJson?: Record<string, unknown>;
+    publishedAt?: string;
     createdAt: string;
     updatedAt: string;
   }> = [];
@@ -79,13 +80,10 @@ function collectBlocks(formData: FormData, locale: string, now: string) {
       _idx: i,
       id,
       pageId: (formData.get(`blocks.${i}.pageId`) as string) || `homepage-${locale}`,
-      blockType: (formData.get(`blocks.${i}.blockType`) as string) || 'promo_banner',
+      blockType: normalizePromoBlockType(formData.get(`blocks.${i}.blockType`)) || 'promo_banner',
       key: (formData.get(`blocks.${i}.key`) as string) || id,
-      status: (formData.get(`blocks.${i}.status`) as string) || 'published',
+      status: normalizePublishStatus(formData.get(`blocks.${i}.status`)) || 'published',
       displayOrder: parseInt((formData.get(`blocks.${i}.displayOrder`) as string) || `${i + 1}`, 10),
-      variant: null,
-      settingsJson: null,
-      visibilityRulesJson: null,
       publishedAt: now,
       createdAt: now,
       updatedAt: now,
@@ -99,7 +97,7 @@ function collectItems(formData: FormData, blockIdx: number, blockId: string, now
   const items: Array<{
     id: string;
     blockId: string;
-    itemType: string;
+    itemType: ContentItemType;
     itemId: string;
     displayOrder: number;
     overrideJson: Record<string, unknown>;
@@ -142,5 +140,21 @@ function collectItems(formData: FormData, blockIdx: number, blockId: string, now
 function formFieldStr(formData: FormData, name: string): string | undefined {
   const val = formData.get(name);
   if (typeof val === 'string' && val.trim().length > 0) return val.trim();
+  return undefined;
+}
+
+function normalizePublishStatus(value: FormDataEntryValue | null): PublishStatus | undefined {
+  if (value === 'draft' || value === 'scheduled' || value === 'published' || value === 'archived') {
+    return value;
+  }
+
+  return undefined;
+}
+
+function normalizePromoBlockType(value: FormDataEntryValue | null): BlockType | undefined {
+  if (value === 'promo_banner') {
+    return value;
+  }
+
   return undefined;
 }
