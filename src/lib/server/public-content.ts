@@ -264,8 +264,8 @@ export async function getPublicStoryDetailViewModel(
     diagnostics: source.diagnostics,
     hero: {
       eyebrow: 'Story detail',
-      title: hasStory ? story.title : 'Story is being prepared',
-      description: hasStory
+      title: story ? story.title : 'Story is being prepared',
+      description: story
         ? story.excerpt ?? 'Thin editorial detail placeholder built for public route-tree expansion.'
         : 'This route is live, but the requested editorial item is not available yet.',
       breadcrumbs: [
