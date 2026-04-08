@@ -30,7 +30,6 @@ export {
   type HomepageDbLikeRecordSet,
   type HomepagePersistenceSnapshot,
   type HomepageReadRepository,
-  type HomepageReadSourceKind,
 } from './repository';
 export {
   createHomepageDbQueryContext,
