@@ -13,7 +13,8 @@ export { getDbClient } from './client';
 export { closeDbSql } from './driver';
 export { createDbExecutor } from './executor';
 export { getDatabaseConfig, getDatabaseConnectionString, getDatabaseHealthSnapshot, createDatabaseClientPlaceholder } from './config';
-export type { DbClient, DbExecutor, DbQueryResult } from './client';
+export type { DbClient } from './client';
+export type { DbExecutor, DbQueryResult } from './executor';
 export type * from './types';
 export type * from './schema-types';
 
