@@ -8,7 +8,7 @@ export type BlockType =
   | 'travel_guides'
   | 'nav_highlight';
 
-export type ContentItemType = 'catalog_item' | 'article' | 'promo' | 'manual_link';
+export type ContentItemType = 'catalog_item' | 'article' | 'promo' | 'manual_link' | 'nav_link';
 export type CatalogItemKind = 'ticket' | 'product' | 'activity' | 'experience';
 export type ArticleType = 'editorial' | 'travel_guide' | 'listicle' | 'campaign_story';
 export type PromoType = 'banner' | 'strip' | 'campaign_card' | 'hero_slide';
