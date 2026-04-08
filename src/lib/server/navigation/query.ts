@@ -107,7 +107,7 @@ export async function getPublicShellData(locale: string): Promise<PublicShellDat
   }
 }
 
-function createFallbackShellData(locale: PublicChromeLocale): PublicShellData {
+export function createFallbackShellData(locale: PublicChromeLocale): PublicShellData {
   const copy = FALLBACK_COPY[locale];
   const nav = FALLBACK_NAV[locale];
 

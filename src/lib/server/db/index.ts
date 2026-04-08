@@ -42,20 +42,39 @@ export interface DbBinding {
   readonly health: ReturnType<typeof getDatabaseHealthSnapshot>;
 }
 
-/** Internal cache — connection chỉ được tạo khi lần đầu truy cập */
-const _bindingCache = new Map<DatabaseConnectionIntent, DbBinding>();
+/** Internal cache — chỉ giữ executor/sql khi thật sự cần */
+const _sqlCache = new Map<DatabaseConnectionIntent, DbClient>();
+const _executorCache = new Map<DatabaseConnectionIntent, DbExecutor>();
 
-function getOrCreateBinding(intent: DatabaseConnectionIntent): DbBinding {
-  if (!_bindingCache.has(intent)) {
-    _bindingCache.set(intent, {
-      sql: getDbClient(intent),
-      executor: createDbExecutor(intent),
-      connectionString: getDatabaseConnectionString(intent),
-      config: getDatabaseConfig(intent),
-      health: getDatabaseHealthSnapshot(intent),
-    });
+function getOrCreateSql(intent: DatabaseConnectionIntent): DbClient {
+  if (!_sqlCache.has(intent)) {
+    _sqlCache.set(intent, getDbClient(intent));
   }
-  return _bindingCache.get(intent)!;
+  return _sqlCache.get(intent)!;
+}
+
+function getOrCreateExecutor(intent: DatabaseConnectionIntent): DbExecutor {
+  if (!_executorCache.has(intent)) {
+    _executorCache.set(intent, createDbExecutor(intent));
+  }
+  return _executorCache.get(intent)!;
+}
+
+function getBindingValue(intent: DatabaseConnectionIntent, prop: PropertyKey) {
+  switch (prop) {
+    case 'sql':
+      return getOrCreateSql(intent);
+    case 'executor':
+      return getOrCreateExecutor(intent);
+    case 'connectionString':
+      return getDatabaseConnectionString(intent);
+    case 'config':
+      return getDatabaseConfig(intent);
+    case 'health':
+      return getDatabaseHealthSnapshot(intent);
+    default:
+      return undefined;
+  }
 }
 
 /**
@@ -69,7 +88,7 @@ function getOrCreateBinding(intent: DatabaseConnectionIntent): DbBinding {
  */
 export const db = new Proxy({} as DbBinding, {
   get(_target, prop) {
-    return Reflect.get(getOrCreateBinding('runtime'), prop);
+    return getBindingValue('runtime', prop);
   },
 });
 
@@ -85,7 +104,7 @@ export const dbRuntime = db;
  */
 export const dbAdmin = new Proxy({} as DbBinding, {
   get(_target, prop) {
-    return Reflect.get(getOrCreateBinding('tooling'), prop);
+    return getBindingValue('tooling', prop);
   },
 });
 
