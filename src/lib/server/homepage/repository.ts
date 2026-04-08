@@ -10,6 +10,7 @@ import { resolveHomePageLocale, type HomePageData, type HomePageLocale } from '@
 import {
   HOMEPAGE_PERSISTENCE_REASONS,
   HOMEPAGE_READ_SOURCES,
+  type HomepagePersistenceReason,
   type HomepageRepositorySnapshot,
 } from './contracts';
 import { readHomepageDbQuery } from './db-query';
