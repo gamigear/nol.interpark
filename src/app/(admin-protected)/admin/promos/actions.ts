@@ -119,7 +119,7 @@ function collectItems(formData: FormData, blockIdx: number, blockId: string, now
     items.push({
       id: `${blockId}-item-${j + 1}`,
       blockId,
-      itemType: (formData.get(`blocks.${blockIdx}.items.${j}.itemType`) as string) || 'promo',
+      itemType: normalizeContentItemType(formData.get(`blocks.${blockIdx}.items.${j}.itemType`)) || 'promo',
       itemId,
       displayOrder: j + 1,
       overrideJson: {
@@ -153,6 +153,14 @@ function normalizePublishStatus(value: FormDataEntryValue | null): PublishStatus
 
 function normalizePromoBlockType(value: FormDataEntryValue | null): BlockType | undefined {
   if (value === 'promo_banner') {
+    return value;
+  }
+
+  return undefined;
+}
+
+function normalizeContentItemType(value: FormDataEntryValue | null): ContentItemType | undefined {
+  if (value === 'catalog_item' || value === 'article' || value === 'promo' || value === 'manual_link' || value === 'nav_link') {
     return value;
   }
 
