@@ -213,24 +213,25 @@ function mapNavigationBlocksToShell(
 function mapLinks(items: ContentBlockItemRecord[]): PublicShellNavLink[] {
   return [...items]
     .sort((left, right) => left.displayOrder - right.displayOrder)
-    .map((item) => {
+    .reduce<PublicShellNavLink[]>((links, item) => {
       const override = item.overrideJson || {};
       const label = asString(override.label);
       const href = asString(override.href);
 
       if (!label || !href || href === '#') {
-        return null;
+        return links;
       }
 
-      return {
+      links.push({
         id: item.itemId || item.id,
         label,
         href,
         target: asOptionalTarget(override.target),
         badge: asOptionalString(override.badge),
-      };
-    })
-    .filter((link): link is PublicShellNavLink => Boolean(link));
+      });
+
+      return links;
+    }, []);
 }
 
 function asString(value: unknown) {
