@@ -18,6 +18,12 @@ const fallbackLabels: Record<PublicChromeLocale, {
     planTrip: 'Plan your trip',
     stories: 'Stories',
   },
+  ko: {
+    subtitle: '한국 여행과 공연 큐레이션',
+    signIn: '로그인',
+    planTrip: '티켓 보기',
+    stories: '스토리',
+  },
   ar: {
     subtitle: 'اكتشف المدينة بذكاء',
     signIn: 'تسجيل الدخول',

@@ -1,4 +1,4 @@
-export type Locale = 'en' | 'ar';
+export type Locale = 'en' | 'ar' | 'ko';
 export type PublicChromeLocale = Locale;
 
 /**
@@ -7,7 +7,7 @@ export type PublicChromeLocale = Locale;
  *
  * Current intentional split:
  * - app/runtime defaults: `en`, `ko`
- * - homepage/public content + chrome coverage: `en`, `ar`
+ * - homepage/public content + chrome coverage: `en`, `ko`, `ar`
  */
 export type AppRuntimeLocale = string;
 
@@ -15,14 +15,14 @@ export const PUBLIC_CHROME_RTL_LOCALES = ['ar'] as const;
 export type PublicChromeRtlLocale = (typeof PUBLIC_CHROME_RTL_LOCALES)[number];
 
 export function isPublicChromeLocale(value: string): value is PublicChromeLocale {
-  return value === 'en' || value === 'ar';
+  return value === 'en' || value === 'ar' || value === 'ko';
 }
 
 export function isPublicChromeRtlLocale(value: string): value is PublicChromeRtlLocale {
   return PUBLIC_CHROME_RTL_LOCALES.includes(value as PublicChromeRtlLocale);
 }
 
-export const HOME_PAGE_LOCALES = ['en', 'ar'] as const;
+export const HOME_PAGE_LOCALES = ['en', 'ar', 'ko'] as const;
 export type HomePageLocale = (typeof HOME_PAGE_LOCALES)[number];
 export const DEFAULT_HOME_PAGE_LOCALE: HomePageLocale = 'en';
 

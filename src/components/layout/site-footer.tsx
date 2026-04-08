@@ -9,6 +9,7 @@ type SiteFooterProps = {
 
 const fallbackLabels: Record<PublicChromeLocale, string> = {
   en: 'Connected public shell with DB-backed navigation/footer fallback for the demo runtime.',
+  ko: '운영 콘텐츠가 연결되기 전까지 홈 셸과 푸터는 안전한 폴백 데이터로 유지됩니다.',
   ar: 'تم ربط واجهة التنقل والتذييل بمسار بيانات آمن مع بديل احتياطي للعرض التجريبي.',
 };
 
@@ -39,11 +40,23 @@ export function SiteFooter({ lang, note, shell }: SiteFooterProps) {
             {brandSubtitle ? <span style={{ opacity: 0.8 }}>{brandSubtitle}</span> : null}
             <span>{resolvedNote}</span>
             {shell?.usedFallback ? (
-              <small style={{ opacity: 0.72 }}>Showing fallback navigation and footer content for this locale.</small>
+              <small style={{ opacity: 0.72 }}>
+                {resolvedLang === 'ko'
+                  ? '현재 로케일은 폴백 네비게이션과 푸터 콘텐츠를 사용 중입니다.'
+                  : 'Showing fallback navigation and footer content for this locale.'}
+              </small>
             ) : shell?.footerGroups?.length ? (
-              <small style={{ opacity: 0.72 }}>Links and legal notes are being served from the live navigation/footer source.</small>
+              <small style={{ opacity: 0.72 }}>
+                {resolvedLang === 'ko'
+                  ? '링크와 법적 고지는 현재 라이브 네비게이션/푸터 소스에서 제공됩니다.'
+                  : 'Links and legal notes are being served from the live navigation/footer source.'}
+              </small>
             ) : shell?.brandSubtitle ? null : (
-              <small style={{ opacity: 0.72 }}>Footer links are not available yet for this locale.</small>
+              <small style={{ opacity: 0.72 }}>
+                {resolvedLang === 'ko'
+                  ? '이 로케일에는 아직 푸터 링크가 준비되지 않았습니다.'
+                  : 'Footer links are not available yet for this locale.'}
+              </small>
             )}
           </div>
 
