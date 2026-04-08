@@ -4,9 +4,13 @@ import type {
   ContentBlockRecord,
 } from '@/lib/server/db/schema-types';
 import { resolveHomePageLocale, type HomePageLocale } from '@/types/home';
-import type { HomepageNavigationViewModel } from '@/lib/server/homepage/view-model';
+import type { HomepageNavigationLink, HomepageNavigationViewModel } from '@/lib/server/homepage/view-model';
 
-function mapNavLinks(blockItems: ContentBlockItemRecord[], blockLocalizations: ContentBlockLocalizationRecord[], locale: HomePageLocale) {
+function mapNavLinks(
+  blockItems: ContentBlockItemRecord[],
+  blockLocalizations: ContentBlockLocalizationRecord[],
+  locale: HomePageLocale,
+): HomepageNavigationLink[] {
   // Simplified: block items contain overrideJson with label/href/badge; localization may override ctaLabel/ctaHref at block level.
   return [...blockItems]
     .sort((left, right) => left.displayOrder - right.displayOrder)
@@ -69,7 +73,7 @@ function asOptionalString(value: unknown) {
   return typeof value === 'string' && value.trim().length > 0 ? value : undefined;
 }
 
-function asOptionalTarget(value: unknown) {
+function asOptionalTarget(value: unknown): HomepageNavigationLink['target'] {
   if (value === '_blank' || value === '_self') return value;
   return undefined;
 }
