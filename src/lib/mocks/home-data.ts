@@ -150,6 +150,149 @@ const homeDataByLocale: Record<HomePageLocale, HomePageData> = {
       ],
     },
   },
+  ko: {
+    heroTitle: '콘서트, 팝업, 페스티벌부터 한국 여행의 최신 소식까지 한 번에 만나보세요',
+    heroDescription:
+      'K-POP 공연과 전시, 여행 아이디어를 한곳에 모아 고객이 익숙한 NOL 월드 첫 화면 흐름에 더 가깝게 탐색할 수 있도록 구성했습니다.',
+    featuredTickets: {
+      id: 'featured-tickets',
+      title: 'Featured Tickets',
+      description: 'Priority booking cards for attractions, passes, and transport experiences.',
+      ctaLabel: 'View all tickets',
+      ctaHref: '#featured-tickets',
+      items: [
+        {
+          id: 'ticket-ko-1',
+          title: 'Museum of the Future',
+          subtitle: 'Fast-track entry',
+          priceLabel: 'From AED 149',
+          badge: 'Best seller',
+          image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=80',
+          href: '#',
+        },
+        {
+          id: 'ticket-ko-2',
+          title: 'Burj Khalifa At The Top',
+          subtitle: 'Sunset slots available',
+          priceLabel: 'From AED 179',
+          badge: 'Popular',
+          image: 'https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=1200&q=80',
+          href: '#',
+        },
+        {
+          id: 'ticket-ko-3',
+          title: 'Dubai Frame',
+          subtitle: 'Anytime admission',
+          priceLabel: 'From AED 52',
+          badge: 'Family friendly',
+          image: 'https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=1200&q=80',
+          href: '#',
+        },
+      ],
+    },
+    topPicks: {
+      id: 'top-picks',
+      title: 'Top Picks',
+      description: 'Flexible card grid for merchandising hero products and bundles.',
+      ctaLabel: 'Explore picks',
+      ctaHref: '#top-picks',
+      items: [
+        {
+          id: 'product-ko-1',
+          title: 'Dubai Unlimited Pass',
+          category: 'City pass',
+          description: 'One pass template card to group multi-attraction offers.',
+          priceLabel: 'From AED 499',
+          image: 'https://images.unsplash.com/photo-1480796927426-f609979314bd?auto=format&fit=crop&w=1200&q=80',
+          href: '#',
+        },
+        {
+          id: 'product-ko-2',
+          title: 'Desert Safari Bundle',
+          category: 'Adventure',
+          description: 'Good placeholder for experience-led merchandising blocks.',
+          priceLabel: 'From AED 229',
+          image: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80',
+          href: '#',
+        },
+        {
+          id: 'product-ko-3',
+          title: 'Dubai Metro Day Access',
+          category: 'Transport',
+          description: 'Represents utility-first products mixed into the homepage.',
+          priceLabel: 'From AED 20',
+          image: 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1200&q=80',
+          href: '#',
+        },
+      ],
+    },
+    editorial: {
+      id: 'editorial',
+      title: 'Editorial',
+      description: 'Story-driven content shelf for featured articles and seasonal highlights.',
+      ctaLabel: 'Read stories',
+      ctaHref: '#editorial',
+      items: [
+        {
+          id: 'story-ko-1',
+          title: 'A first-timer guide to navigating Dubai',
+          excerpt: 'Use this block for long-form editorial curation and travel inspiration.',
+          eyebrow: 'City stories',
+          image: 'https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1200&q=80',
+          href: '#',
+        },
+        {
+          id: 'story-ko-2',
+          title: 'Where to go after sunset in Downtown Dubai',
+          excerpt: 'Supports magazine-like cards with text emphasis.',
+          eyebrow: 'Nightlife',
+          image: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=1200&q=80',
+          href: '#',
+        },
+        {
+          id: 'story-ko-3',
+          title: '3-day itinerary for culture, food, and views',
+          excerpt: 'Reusable content rail for future CMS integration.',
+          eyebrow: 'Itinerary',
+          image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80',
+          href: '#',
+        },
+      ],
+    },
+    travelGuides: {
+      id: 'travel-guides',
+      title: 'Travel Guides',
+      description: 'Structured destination helper cards for planning and discovery.',
+      ctaLabel: 'See guides',
+      ctaHref: '#travel-guides',
+      items: [
+        {
+          id: 'guide-ko-1',
+          title: 'How to use public transport in Dubai',
+          excerpt: 'A placeholder guide card ready for route planning content.',
+          eyebrow: 'Transport guide',
+          image: 'https://images.unsplash.com/photo-1493558103817-58b2924bce98?auto=format&fit=crop&w=1200&q=80',
+          href: '#',
+        },
+        {
+          id: 'guide-ko-2',
+          title: 'Best neighborhoods for visitors',
+          excerpt: 'Use this section to expand into geo-specific planning content.',
+          eyebrow: 'Neighborhoods',
+          image: 'https://images.unsplash.com/photo-1468413253725-0d5181091126?auto=format&fit=crop&w=1200&q=80',
+          href: '#',
+        },
+        {
+          id: 'guide-ko-3',
+          title: 'What to book before you arrive',
+          excerpt: 'Designed for practical evergreen guidance blocks.',
+          eyebrow: 'Planning tips',
+          image: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=80',
+          href: '#',
+        },
+      ],
+    },
+  },
   ar: {
     heroTitle: 'اكتشف دبي من خلال صفحة سفر ذكية واحدة',
     heroDescription:
@@ -308,7 +451,7 @@ function buildPublicLocaleHref(locale: AppRuntimeLocale, segment: string) {
 export function getHomePageData(lang: string): HomePageData {
   const routeLocale: AppRuntimeLocale = lang;
   const locale = resolveHomePageLocale(lang);
-  const baseData = homeDataByLocale[locale];
+  const baseData = homeDataByLocale[locale] ?? homeDataByLocale[DEFAULT_HOME_PAGE_LOCALE];
 
   return {
     ...baseData,
