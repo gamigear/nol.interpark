@@ -241,7 +241,7 @@ function asOptionalString(value: unknown) {
   return typeof value === 'string' && value.trim() ? value.trim() : undefined;
 }
 
-function asOptionalTarget(value: unknown) {
+function asOptionalTarget(value: unknown): PublicShellNavLink['target'] {
   return value === '_blank' || value === '_self' ? value : undefined;
 }
 
