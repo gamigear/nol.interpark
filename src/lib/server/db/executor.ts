@@ -1,4 +1,4 @@
-import type { Sql, PendingQuery, ParameterOrFragment } from 'postgres';
+import type { Sql, ParameterOrFragment } from 'postgres';
 import { getDbClient } from '@/lib/server/db/client';
 import type { DatabaseConnectionIntent } from '@/lib/server/db/types';
 
@@ -22,7 +22,7 @@ export function createDbExecutor(intent: DatabaseConnectionIntent = 'runtime'): 
       strings: TemplateStringsArray,
       ...values: ParameterOrFragment<never>[]
     ): Promise<DbQueryResult<TRow>> {
-      const result = (await sql(strings, ...values)) as PendingQuery<TRow[]>;
+      const result = await sql(strings, ...values);
       return result as unknown as DbQueryResult<TRow>;
     },
   };
