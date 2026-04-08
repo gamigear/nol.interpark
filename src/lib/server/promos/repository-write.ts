@@ -1,4 +1,4 @@
-import type { Sql } from 'postgres';
+import type { Sql, TransactionSql } from 'postgres';
 import { getDbClient } from '@/lib/server/db/client';
 import type { DatabaseConnectionIntent } from '@/lib/server/db/types';
 import type {
@@ -19,7 +19,7 @@ export async function savePromosSnapshot(
 ): Promise<void> {
   const sql = getDbClient(intent);
 
-  await sql.begin(async (trx: Sql) => {
+  await sql.begin(async (trx: TransactionSql<any>) => {
     const blockIds = payload.blocks.map((b) => b.id);
     if (blockIds.length) {
       await trx`delete from content_block_items where block_id = any(${blockIds})`;
@@ -41,7 +41,7 @@ export async function savePromosSnapshot(
   });
 }
 
-async function insertBlock(trx: Sql, block: ContentBlockRecord) {
+async function insertBlock(trx: TransactionSql<any>, block: ContentBlockRecord) {
   await trx`
     insert into content_blocks (id, page_id, block_type, key, status, display_order, variant, settings_json, visibility_rules_json, published_at, created_at, updated_at)
     values (${block.id}, ${block.pageId}, ${block.blockType}, ${block.key}, ${block.status}, ${block.displayOrder}, ${block.variant || null},
@@ -50,7 +50,7 @@ async function insertBlock(trx: Sql, block: ContentBlockRecord) {
   `;
 }
 
-async function insertBlockLocalization(trx: Sql, loc: ContentBlockLocalizationRecord) {
+async function insertBlockLocalization(trx: TransactionSql<any>, loc: ContentBlockLocalizationRecord) {
   await trx`
     insert into content_block_localizations (id, block_id, locale_code, eyebrow, title, subtitle, cta_label, cta_href, created_at, updated_at)
     values (${loc.id}, ${loc.blockId}, ${loc.localeCode}, ${loc.eyebrow || null}, ${loc.title || null}, ${loc.subtitle || null},
@@ -58,7 +58,7 @@ async function insertBlockLocalization(trx: Sql, loc: ContentBlockLocalizationRe
   `;
 }
 
-async function insertBlockItem(trx: Sql, item: ContentBlockItemRecord) {
+async function insertBlockItem(trx: TransactionSql<any>, item: ContentBlockItemRecord) {
   await trx`
     insert into content_block_items (id, block_id, item_type, item_id, display_order, override_json, created_at, updated_at)
     values (${item.id}, ${item.blockId}, ${item.itemType}, ${item.itemId || null}, ${item.displayOrder}, ${item.overrideJson || null},
