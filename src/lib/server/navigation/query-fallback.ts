@@ -7,6 +7,11 @@ const FALLBACK_COPY: Record<PublicChromeLocale, Pick<PublicShellData, 'brandLabe
     brandSubtitle: 'Smart city discovery',
     footerNote: 'Connected public shell with DB-backed navigation/footer fallback for the demo runtime.',
   },
+  ko: {
+    brandLabel: 'world.nol',
+    brandSubtitle: '한국 여행과 공연 큐레이션',
+    footerNote: '운영 콘텐츠 연결 전까지는 한국어용 네비게이션과 푸터가 안전한 폴백 콘텐츠로 노출됩니다.',
+  },
   ar: {
     brandLabel: 'world.nol',
     brandSubtitle: 'اكتشف المدينة بذكاء',
@@ -25,6 +30,18 @@ const FALLBACK_NAV: Record<PublicChromeLocale, { primary: PublicShellNavLink[]; 
     secondary: [
       { id: 'sign-in', label: 'Sign in', href: '/en/stories/dubai-first-timer-guide' },
       { id: 'plan-trip', label: 'Plan your trip', href: '/en/tickets' },
+    ],
+  },
+  ko: {
+    primary: [
+      { id: 'tickets', label: '티켓', href: '/ko/tickets' },
+      { id: 'top-picks', label: '추천 픽', href: '/ko/top-picks' },
+      { id: 'stories', label: '스토리', href: '/ko/stories/dubai-first-timer-guide' },
+      { id: 'guides', label: '여행 가이드', href: '/ko/guides' },
+    ],
+    secondary: [
+      { id: 'sign-in', label: '로그인', href: '/ko/stories/dubai-first-timer-guide' },
+      { id: 'plan-trip', label: '티켓 보기', href: '/ko/tickets' },
     ],
   },
   ar: {
@@ -55,25 +72,25 @@ export function createFallbackShellData(locale: PublicChromeLocale): PublicShell
       {
         id: 'footer-explore',
         kind: 'explore',
-        title: locale === 'ar' ? 'استكشف' : 'Explore',
+        title: locale === 'ar' ? 'استكشف' : locale === 'ko' ? '둘러보기' : 'Explore',
         links: nav.primary,
       },
       {
         id: 'footer-support',
         kind: 'support',
-        title: locale === 'ar' ? 'الدعم' : 'Support',
+        title: locale === 'ar' ? 'الدعم' : locale === 'ko' ? '고객 지원' : 'Support',
         links: [
           nav.secondary[0],
-          { id: 'help', label: locale === 'ar' ? 'المساعدة' : 'Help', href: `/${locale}/guides` },
+          { id: 'help', label: locale === 'ar' ? 'المساعدة' : locale === 'ko' ? '도움말' : 'Help', href: `/${locale}/guides` },
         ].filter(Boolean) as PublicShellNavLink[],
       },
       {
         id: 'footer-legal',
         kind: 'legal',
-        title: locale === 'ar' ? 'قانوني' : 'Legal',
+        title: locale === 'ar' ? 'قانوني' : locale === 'ko' ? '정책' : 'Legal',
         links: [
-          { id: 'privacy', label: locale === 'ar' ? 'الخصوصية' : 'Privacy', href: `/${locale}` },
-          { id: 'terms', label: locale === 'ar' ? 'الشروط' : 'Terms', href: `/${locale}` },
+          { id: 'privacy', label: locale === 'ar' ? 'الخصوصية' : locale === 'ko' ? '개인정보처리방침' : 'Privacy', href: `/${locale}` },
+          { id: 'terms', label: locale === 'ar' ? 'الشروط' : locale === 'ko' ? '이용약관' : 'Terms', href: `/${locale}` },
         ],
       },
     ] as PublicShellFooterGroup[],
