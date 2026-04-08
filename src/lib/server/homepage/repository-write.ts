@@ -1,4 +1,4 @@
-import type { Sql } from 'postgres';
+import type { Sql, TransactionSql } from 'postgres';
 import { getDbClient } from '@/lib/server/db/client';
 import type { DatabaseConnectionIntent } from '@/lib/server/db/types';
 import type {
@@ -22,7 +22,7 @@ export async function saveHomepageSnapshot(
   intent: DatabaseConnectionIntent = 'runtime',
 ): Promise<void> {
   const sql = getDbClient(intent);
-  await sql.begin(async (trx: Sql) => {
+  await sql.begin(async (trx: TransactionSql<any>) => {
     await upsertPage(trx, payload.page);
 
     if (payload.pageLocalization) {
@@ -57,7 +57,7 @@ export async function saveHomepageSnapshot(
   });
 }
 
-async function upsertPage(trx: Sql, page: PageRecord) {
+async function upsertPage(trx: TransactionSql<any>, page: PageRecord) {
   await trx`
     insert into pages (id, page_type, slug, status, visibility, published_at, created_at, updated_at, created_by, updated_by)
     values (${page.id}, ${page.pageType}, ${page.slug}, ${page.status}, ${page.visibility}, ${page.publishedAt},
@@ -73,7 +73,7 @@ async function upsertPage(trx: Sql, page: PageRecord) {
   `;
 }
 
-async function upsertPageLocalization(trx: Sql, loc: PageLocalizationRecord) {
+async function upsertPageLocalization(trx: TransactionSql<any>, loc: PageLocalizationRecord) {
   await trx`
     insert into page_localizations (id, page_id, locale_code, title, seo_title, seo_description, canonical_path, created_at, updated_at)
     values (${loc.id}, ${loc.pageId}, ${loc.localeCode}, ${loc.title}, ${loc.seoTitle || null}, ${loc.seoDescription || null},
@@ -87,7 +87,7 @@ async function upsertPageLocalization(trx: Sql, loc: PageLocalizationRecord) {
   `;
 }
 
-async function insertBlock(trx: Sql, block: ContentBlockRecord) {
+async function insertBlock(trx: TransactionSql<any>, block: ContentBlockRecord) {
   await trx`
     insert into content_blocks (id, page_id, block_type, key, status, display_order, variant, settings_json, visibility_rules_json, published_at, created_at, updated_at)
     values (${block.id}, ${block.pageId}, ${block.blockType}, ${block.key}, ${block.status}, ${block.displayOrder}, ${block.variant || null},
@@ -96,7 +96,7 @@ async function insertBlock(trx: Sql, block: ContentBlockRecord) {
   `;
 }
 
-async function insertBlockLocalization(trx: Sql, loc: ContentBlockLocalizationRecord) {
+async function insertBlockLocalization(trx: TransactionSql<any>, loc: ContentBlockLocalizationRecord) {
   await trx`
     insert into content_block_localizations (id, block_id, locale_code, eyebrow, title, subtitle, cta_label, cta_href, created_at, updated_at)
     values (${loc.id}, ${loc.blockId}, ${loc.localeCode}, ${loc.eyebrow || null}, ${loc.title || null}, ${loc.subtitle || null},
@@ -104,7 +104,7 @@ async function insertBlockLocalization(trx: Sql, loc: ContentBlockLocalizationRe
   `;
 }
 
-async function insertBlockItem(trx: Sql, item: ContentBlockItemRecord) {
+async function insertBlockItem(trx: TransactionSql<any>, item: ContentBlockItemRecord) {
   await trx`
     insert into content_block_items (id, block_id, item_type, item_id, display_order, override_json, created_at, updated_at)
     values (${item.id}, ${item.blockId}, ${item.itemType}, ${item.itemId || null}, ${item.displayOrder}, ${item.overrideJson || null},
