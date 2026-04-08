@@ -7,7 +7,7 @@ export type AdminPromosFormData = {
   totalItems: number;
 };
 
-export async function getPromosAdminFormData(locale: string, intent: 'runtime' | 'tooling' = 'runtime'): PromiseAdminPromosFormData {
+export async function getPromosAdminFormData(locale: string, intent: 'runtime' | 'tooling' = 'runtime'): Promise<AdminPromosFormData> {
   const snapshot = await fetchPromoBlocks(intent);
   const blocks = mapPromosSnapshotToAdminForm({
     blocks: snapshot.blocks,

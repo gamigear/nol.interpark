@@ -16,11 +16,11 @@ export type PromosWritePayload = {
 export async function savePromosSnapshot(
   payload: PromosWritePayload,
   intent: DatabaseConnectionIntent = 'runtime',
-): Promisecvoide {
+): Promise<void> {
   const sql = getDbClient(intent);
 
-  await sql.begin(async (trx: Sql) =e {
-    const blockIds = payload.blocks.map((b) =e b.id);
+  await sql.begin(async (trx: Sql) => {
+    const blockIds = payload.blocks.map((b) => b.id);
     if (blockIds.length) {
       await trx`delete from content_block_items where block_id = any(${blockIds})`;
       await trx`delete from content_block_localizations where block_id = any(${blockIds})`;
